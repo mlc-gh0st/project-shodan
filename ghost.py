@@ -64,7 +64,7 @@ else:
     os.system('clear')
 
 print("\033[1;32m")
-slow_print("GHOST PROTOCOL v9.1 (MANUAL LINK) LOADED.")
+slow_print("GHOST PROTOCOL v10.0 (MANUAL LINK) LOADED.")
 print("---------------------------------")
 
 current_user = getpass.getuser()
@@ -73,7 +73,7 @@ slow_print(f"KERNEL:   {platform.release()}")
 
 while True:
     print("\nSELECT OPERATION:")
-    print("1.  ARCHIVE MISSION (LOGOS)")
+    print("1.  ARCHIVE MISSION (LOGOS - LOCAL)")
     print("2.  NETWORK PING (ECHO)")
     print("3.  PORT SCANNER (THREADED)")
     print("4.  EXTRACT PAGE TITLE")
@@ -88,7 +88,7 @@ while True:
 
     # [LOGIC GATE START]
     if choice == "1":
-        # THE JOURNAL PROTOCOL (Local Only)
+        # THE JOURNAL PROTOCOL (Local Only - No Git Automation)
         slow_print("ENTER MISSION OBJECTIVE:")
         mission = input("> ")
         if mission == "": mission = "routine_update"
