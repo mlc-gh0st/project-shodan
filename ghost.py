@@ -107,17 +107,23 @@ while True:
             with open("mission_log.txt", "a") as f:
                 f.write(log_entry)
             
-            # B. The Git Bind
+            # B. The Git Bind (The Real Skill)
             slow_print("ENCRYPTING STATE TO REPOSITORY...")
             try:
+                # 1. Stage and Commit (Local)
                 subprocess.run(["git", "add", "."], check=True)
                 subprocess.run(["git", "commit", "-m", f"MISSION: {mission}"], check=True)
                 
+                # 2. Uplink to Cloud (Remote)
+                # We add this line now that the token is cached:
+                slow_print("UPLINKING TO ORBIT (GITHUB)...")
+                subprocess.run(["git", "push"], check=True)
+                
                 print("\033[1;32m")
-                slow_print("[+] SNAPSHOT SECURED. HISTORY IMMUTABLE.")
-            except subprocess.CalledProcessError:
+                slow_print("[+] SNAPSHOT SECURED. DATA IN THE CLOUD.")
+            except subprocess.CalledProcessError as e:
                 print("\033[1;31m")
-                slow_print("[!] GIT ERROR: REPOSITORY NOT LINKED.")
+                slow_print(f"[!] UPLINK ERROR: {e}")
         else:
             slow_print("OPERATION ABORTED.")
 
