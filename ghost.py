@@ -86,32 +86,49 @@ while True:
     print("11. DISCONNECT")
     choice = input("\n> ")
 
+   # [LOGIC GATE START]
     if choice == "1":
-        mission = input("ENTER OBJECTIVE: ")
-        # 1. Stage the entry in memory first
+        # THE COMMIT PROTOCOL (Primary)
+        slow_print("ENTER MISSION OBJECTIVE (COMMIT MESSAGE):")
+        mission = input("> ")
+        if mission == "": mission = "routine_update"
+        
+        # 1. Timestamp the logic
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        entry = f"{timestamp} | {mission}\n"
+        log_entry = f"{timestamp} | {mission}\n"
         
-        # 2. The Review (Journal Mode)
-        print("\n--- ENTRY PREVIEW ---")
-        print(entry.strip())
-        print("---------------------")
+        # 2. Append to the visual log
+        print("\n--- STAGING ENTRY ---")
+        print(log_entry.strip())
         
-        # 3. The Logic Gate
-        confirm = input("SAVE TO JOURNAL? [Y/n]: ").lower()
-        
+        confirm = input("EXECUTE COMMIT? [Y/n]: ").lower()
         if confirm != "n":
+            # A. Write to the text file
             with open("mission_log.txt", "a") as f:
-                f.write(entry)
-            slow_print("ENTRY COMMITTED TO DISK.")
+                f.write(log_entry)
+            
+            # B. The Git Bind
+            slow_print("ENCRYPTING STATE TO REPOSITORY...")
+            try:
+                subprocess.run(["git", "add", "."], check=True)
+                subprocess.run(["git", "commit", "-m", f"MISSION: {mission}"], check=True)
+                
+                print("\033[1;32m")
+                slow_print("[+] SNAPSHOT SECURED. HISTORY IMMUTABLE.")
+            except subprocess.CalledProcessError:
+                print("\033[1;31m")
+                slow_print("[!] GIT ERROR: REPOSITORY NOT LINKED.")
         else:
-            slow_print("ENTRY PURGED FROM MEMORY.")
+            slow_print("OPERATION ABORTED.")
 
     elif choice == "2":
+        # NETWORK PING (The First 'Else If')
         target = input("ENTER TARGET: ")
         if target == "": target = "google.com"
         param = '-n' if platform.system().lower() == 'windows' else '-c'
         subprocess.run(["ping", param, "2", target])
+        
+    # [REMAINING ELIF BLOCKS CONTINUE HERE...]
 
     elif choice == "3":
         target = input("ENTER TARGET DOMAIN: ")
