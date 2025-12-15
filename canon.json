@@ -1,0 +1,1858 @@
+{
+  "meta": {
+    "operator": "James Leitner",
+    "version": "2.0",
+    "protocol": "Kim Protocol",
+    "total_artifacts": 140
+  },
+  "canon": [
+    {
+      "id": "ARCHIVE-0000",
+      "title": "3 Penny Opera, The",
+      "director": "Pabst, G.W.",
+      "year": "1931",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0001",
+      "title": "39 Steps, The",
+      "director": "Hitchcock, Alfred",
+      "year": "1935",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0002",
+      "title": "400 Blows, The",
+      "director": "Truffaut, Fran\u00e7ois",
+      "year": "1959",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0003",
+      "title": "8\u00bd",
+      "director": "Fellini, Federico",
+      "year": "1963",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0004",
+      "title": "Amarcord",
+      "director": "Fellini, Federico",
+      "year": "1973",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0005",
+      "title": "Andrei Rublev",
+      "director": "Tarkovsky, Andrei",
+      "year": "1966",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0006",
+      "title": "Antichrist",
+      "director": "Von Trier, Lars",
+      "year": "2009",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0007",
+      "title": "Apart From You",
+      "director": "Naruse, Mikio",
+      "year": "1933",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0008",
+      "title": "Army of Shadows",
+      "director": "Melville, Jean-Pierre",
+      "year": "1969",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0009",
+      "title": "Autumn Afternoon, An",
+      "director": "Ozu, Yasujiro",
+      "year": "1962",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0010",
+      "title": "Avventura, L'",
+      "director": "Antonioni, Michelangelo",
+      "year": "1960",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0011",
+      "title": "Badlands",
+      "director": "Malick, Terrence",
+      "year": "1973",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0012",
+      "title": "Band of Outsiders",
+      "director": "Godard, Jean-Luc",
+      "year": "1964",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0013",
+      "title": "Barry Lyndon",
+      "director": "Kubrick, Stanley",
+      "year": "1975",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0014",
+      "title": "Bay of Angels",
+      "director": "Demy, Jacques",
+      "year": "1963",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0015",
+      "title": "Being John Malkovich",
+      "director": "Jonze, Spike",
+      "year": "1999",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0016",
+      "title": "Black Orpheus",
+      "director": "Camus, Marcel",
+      "year": "1959",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0017",
+      "title": "Blonde Venus",
+      "director": "Sternberg, Josef von",
+      "year": "1932",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0018",
+      "title": "Blow Out",
+      "director": "De Palma, Brian",
+      "year": "1981",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0019",
+      "title": "Blow-Up",
+      "director": "Antonioni, Michelangelo",
+      "year": "1966",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0020",
+      "title": "Blue Velvet",
+      "director": "Lynch, David",
+      "year": "1986",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0021",
+      "title": "Branded to Kill",
+      "director": "Suzuki, Seijun",
+      "year": "1967",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0022",
+      "title": "Brazil",
+      "director": "Gilliam, Terry",
+      "year": "1958",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0023",
+      "title": "Breaking the Waves",
+      "director": "Von Trier, Lars",
+      "year": "1996",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0024",
+      "title": "Breathless",
+      "director": "Godard, Jean-Luc",
+      "year": "1960",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0025",
+      "title": "Cercle Rouge, Le",
+      "director": "Melville, Jean-Pierre",
+      "year": "1970",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0026",
+      "title": "chambre en ville, Une",
+      "director": "Demy, Jacques",
+      "year": "1982",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0027",
+      "title": "Chasing Amy",
+      "director": "Smith, Kevin",
+      "year": "1997",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0028",
+      "title": "Chimes at Midnight",
+      "director": "Welles, Orson",
+      "year": "1966",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0029",
+      "title": "Colt Is My Passport, A",
+      "director": "Nomura, Takashi",
+      "year": "1967",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0030",
+      "title": "Cries And Whispers",
+      "director": "Bergman, Ingmar",
+      "year": "1972",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0031",
+      "title": "Cronos",
+      "director": "del Toro, Guillermo",
+      "year": "1993",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0032",
+      "title": "Cruel Gun Story",
+      "director": "Furukawa, Yakumi",
+      "year": "1964",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0033",
+      "title": "Days of Heaven",
+      "director": "Malick, Terrence",
+      "year": "1978",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0034",
+      "title": "deuxi\u00e8me souffle, Le",
+      "director": "Melville, Jean-Pierre",
+      "year": "1966",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0035",
+      "title": "Devil Is a Woman, The",
+      "director": "Sternberg, Josef von",
+      "year": "1935",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0036",
+      "title": "Dishonored",
+      "director": "Sternberg, Josef von",
+      "year": "1931",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0037",
+      "title": "Dolce Vita, La",
+      "director": "Fellini, Federico",
+      "year": "1960",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0038",
+      "title": "Donkey Skin",
+      "director": "Demy, Jacques",
+      "year": "1970",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0039",
+      "title": "Doulos, Le",
+      "director": "Melville, Jean-Pierre",
+      "year": "1962",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0040",
+      "title": "Eclisse, L'",
+      "director": "Antonioni, Michelangelo",
+      "year": "1962",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0041",
+      "title": "Every-Night Dreams",
+      "director": "Naruse, Mikio",
+      "year": "1933",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0042",
+      "title": "Executioner, The",
+      "director": "Berlanga, Luis Garc\u00eda",
+      "year": "1963",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0043",
+      "title": "F For Fake",
+      "director": "Welles, Orson",
+      "year": "1975",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0044",
+      "title": "Fanny & Alexander - Television Version",
+      "director": "Bergman, Ingmar",
+      "year": "1982",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0045",
+      "title": "Fanny & Alexander - Theatrical Version",
+      "director": "Bergman, Ingmar",
+      "year": "1982",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0046",
+      "title": "Flunky, Word Hard",
+      "director": "Naruse, Mikio",
+      "year": "1931",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0047",
+      "title": "Foreign Correspondent",
+      "director": "Hitchcock, Alfred",
+      "year": "1940",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0048",
+      "title": "Friends of Eddie Coyle, The",
+      "director": "Yates, Peter",
+      "year": "1973",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0049",
+      "title": "Game, The",
+      "director": "Fincher, David",
+      "year": "1997",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0050",
+      "title": "Great Dictator, The",
+      "director": "Chaplin, Charlie",
+      "year": "1940",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0051",
+      "title": "High and Low",
+      "director": "Kurosawa, Akira",
+      "year": "1963",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0052",
+      "title": "Hiroshima mon amour",
+      "director": "Resnais, Alain",
+      "year": "1959",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0053",
+      "title": "His Girl Friday",
+      "director": "Hawks, Howard",
+      "year": "1940",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0054",
+      "title": "Hit, The",
+      "director": "Frears, Stephen",
+      "year": "1984",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0055",
+      "title": "House",
+      "director": "Obayashi, Nobuhiko",
+      "year": "1977",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0056",
+      "title": "I Am Waiting",
+      "director": "Kurahara, Koreyoshi",
+      "year": "1957",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0057",
+      "title": "Investigation of a Citizen Above Suspicion",
+      "director": "Petri, Elio",
+      "year": "1970",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0058",
+      "title": "Japanese Girls at the Harbor",
+      "director": "Shimizu, Hiroshi",
+      "year": "1933",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0059",
+      "title": "Jules and Jim",
+      "director": "Truffaut, Fran\u00e7ois",
+      "year": "1962",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0060",
+      "title": "Kiss Me Deadly",
+      "director": "Aldrich, Robert",
+      "year": "1955",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0061",
+      "title": "Lady Vanishes, The",
+      "director": "Hitchcock, Alfred",
+      "year": "1938",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0062",
+      "title": "L'argent",
+      "director": "Bresson, Robert",
+      "year": "1983",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0063",
+      "title": "Last Days of Disco, The",
+      "director": "Stillman, Whit",
+      "year": "1998",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0064",
+      "title": "Late Spring",
+      "director": "Ozu, Yasujiro",
+      "year": "1949",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0065",
+      "title": "Life Aquatic with Steve Zissou, The",
+      "director": "Anderson, Wes",
+      "year": "2004",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 5.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0066",
+      "title": "Lola",
+      "director": "Demy, Jacques",
+      "year": "1961",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0067",
+      "title": "Lone Wolf and Cub: Baby Cart at the River Styx",
+      "director": "Misumi, Kenji",
+      "year": "1972",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0068",
+      "title": "Lone Wolf and Cub: Baby Cart in Peril",
+      "director": "Saito, Buichi",
+      "year": "1972",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0069",
+      "title": "Lone Wolf and Cub: Baby Cart in the Land of Demons",
+      "director": "Misumi, Kenji",
+      "year": "1973",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0070",
+      "title": "Lone Wolf and Cub: Baby Cart to Hades",
+      "director": "Misumi, Kenji",
+      "year": "1972",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0071",
+      "title": "Lone Wolf and Cub: Sword of Vengeance",
+      "director": "Misumi, Kenji",
+      "year": "1972",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0072",
+      "title": "Lone Wolf and Cub: White Heaven in Hell",
+      "director": "Kuroda, Yoshiyuki",
+      "year": "1974",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0073",
+      "title": "M",
+      "director": "Lang, Fritz",
+      "year": "1931",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0074",
+      "title": "Making of \"Fanny & Alexander,\" The",
+      "director": "Bergman, Ingmar",
+      "year": "1983",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0075",
+      "title": "Man Escaped, A",
+      "director": "Bresson, Robert",
+      "year": "1956",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0076",
+      "title": "Man Who Knew Too Much, The",
+      "director": "Hitchcock, Alfred",
+      "year": "1934",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0077",
+      "title": "Morocco",
+      "director": "Sternberg, Josef von",
+      "year": "1930",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0078",
+      "title": "Mr. Thank You",
+      "director": "Shimizu, Hiroshi",
+      "year": "1936",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0079",
+      "title": "Mulholland Dr.",
+      "director": "Lynch, David",
+      "year": "2001",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0080",
+      "title": "My Dinner with Andr\u00e9",
+      "director": "Malle, Louis",
+      "year": "1981",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0081",
+      "title": "No Blood Relation",
+      "director": "Naruse, Mikio",
+      "year": "1932",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0082",
+      "title": "Notte, La",
+      "director": "Antonioni, Michelangelo",
+      "year": "1961",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0083",
+      "title": "Ornamental Hairpin",
+      "director": "Shimizu, Hiroshi",
+      "year": "1941",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0084",
+      "title": "Pale Flower",
+      "director": "Shinoda, Masahiro",
+      "year": "1964",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0085",
+      "title": "Pan's Labyrinth",
+      "director": "del Toro, Guillermo",
+      "year": "2006",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0086",
+      "title": "Paris Belongs to Us",
+      "director": "Rivette, Jacques",
+      "year": "1961",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0087",
+      "title": "Passion of Joan of Arc, The",
+      "director": "Dreyer, Carl Th.",
+      "year": "1928",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0088",
+      "title": "Persona",
+      "director": "Bergman, Ingmar",
+      "year": "1966",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0089",
+      "title": "Pickpocket",
+      "director": "Bresson, Robert",
+      "year": "1959",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0090",
+      "title": "Rashomon",
+      "director": "Kurosawa, Akira",
+      "year": "1950",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0091",
+      "title": "Rebecca",
+      "director": "Hitchcock, Alfred",
+      "year": "1940",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0092",
+      "title": "Red Shoes, The",
+      "director": "Powell, Michael & Pressburger, Emerich",
+      "year": "1948",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0093",
+      "title": "Richard III",
+      "director": "Olivier, Laurence",
+      "year": "1955",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0094",
+      "title": "Rusty Knife",
+      "director": "Masuda, Toshio",
+      "year": "1958",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0095",
+      "title": "Samoura\u00ef, Le",
+      "director": "Melville, Jean-Pierre",
+      "year": "1967",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0096",
+      "title": "Samurai I: Musashi Miyamoto",
+      "director": "Inagaki, Hiroshi",
+      "year": "1954",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0097",
+      "title": "Samurai II: Duel at Ichijoji Temple",
+      "director": "Inagaki, Hiroshi",
+      "year": "1955",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0098",
+      "title": "Samurai III: Duel at Ganryu Island",
+      "director": "Inagaki, Hiroshi",
+      "year": "1956",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0099",
+      "title": "Sanjuro",
+      "director": "Kurosawa, Akira",
+      "year": "1962",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0100",
+      "title": "Scarlet Empress, The",
+      "director": "Sternberg, Josef von",
+      "year": "1934",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0101",
+      "title": "Seven Samurai",
+      "director": "Kurosawa, Akira",
+      "year": "1954",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0102",
+      "title": "Seventh Seal, The",
+      "director": "Bergman, Ingmar",
+      "year": "1957",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0103",
+      "title": "Shanghai Express",
+      "director": "Sternberg, Josef von",
+      "year": "1932",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0104",
+      "title": "Short Cuts",
+      "director": "Altman, Robert",
+      "year": "1993",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0105",
+      "title": "Silence de la Mar, Le",
+      "director": "Melville, Jean-Pierre",
+      "year": "1949",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0106",
+      "title": "Story of the Last Chrysanthemum, The",
+      "director": "Mizoguchi, Kenji",
+      "year": "1939",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0107",
+      "title": "Stray Dog",
+      "director": "Kurosawa, Akira",
+      "year": "1949",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0108",
+      "title": "Street Without End",
+      "director": "Naruse, Mikio",
+      "year": "1934",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0109",
+      "title": "Summer Interlude",
+      "director": "Bergman, Ingmar",
+      "year": "1951",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0110",
+      "title": "Summer with Monika",
+      "director": "Bergman, Ingmar",
+      "year": "1953",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0111",
+      "title": "Take Aim at the Police Van",
+      "director": "Suzuki, Seijun",
+      "year": "1960",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0112",
+      "title": "The Devil's Backbone",
+      "director": "del Toro, Guillermo",
+      "year": "2001",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 6.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0113",
+      "title": "The Front Page",
+      "director": "Milestone, Lewis",
+      "year": "1931",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0114",
+      "title": "The Masseurs and a Woman",
+      "director": "Shimizu, Hiroshi",
+      "year": "1938",
+      "format": "DVD",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0115",
+      "title": "Thin Red Line, The",
+      "director": "Malick, Terrence",
+      "year": "1998",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0116",
+      "title": "Time Bandits",
+      "director": "Gilliam, Terry",
+      "year": "1981",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0117",
+      "title": "Tokyo Story",
+      "director": "Ozu, Yasujiro",
+      "year": "1953",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0118",
+      "title": "Touch of Zen, A",
+      "director": "Hu, King",
+      "year": "1971",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0119",
+      "title": "Umbrellas of Cherbourg, The",
+      "director": "Demy, Jacques",
+      "year": "1964",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0120",
+      "title": "Videodrome",
+      "director": "Cronenberg, David",
+      "year": "1983",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0121",
+      "title": "Virgin Spring, The",
+      "director": "Bergman, Ingmar",
+      "year": "1960",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0122",
+      "title": "Vivre sa vie",
+      "director": "Godard, Jean-Luc",
+      "year": "1962",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0123",
+      "title": "Wild Strawberries",
+      "director": "Bergman, Ingmar",
+      "year": "1957",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0124",
+      "title": "Yojimbo",
+      "director": "Kurosawa, Akira",
+      "year": "1961",
+      "format": "Blu-Ray",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "ARCHIVE-0125",
+      "title": "Young Girls of Rochefort, The",
+      "director": "Demy, Jacques",
+      "year": "1967",
+      "format": "Dual-Format",
+      "type": "CINEMA_ANALOG",
+      "shodan_weight": 7.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "CRITERION"
+      ]
+    },
+    {
+      "id": "DIGITAL-0126",
+      "title": "Akira",
+      "director": "Otomo, Katsuhiro",
+      "year": "1988",
+      "format": "DIGITAL/ROM",
+      "type": "ANIME_CEL",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Nuclear Cathedral."
+    },
+    {
+      "id": "DIGITAL-0127",
+      "title": "Neon Genesis Evangelion",
+      "director": "Anno, Hideaki",
+      "year": "1995",
+      "format": "DIGITAL/ROM",
+      "type": "ANIME_CEL",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The AT Field / Soul Barrier."
+    },
+    {
+      "id": "DIGITAL-0128",
+      "title": "Ghost in the Shell",
+      "director": "Oshii, Mamoru",
+      "year": "1995",
+      "format": "DIGITAL/ROM",
+      "type": "ANIME_CEL",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Ghost in the Machine."
+    },
+    {
+      "id": "DIGITAL-0129",
+      "title": "Cowboy Bebop",
+      "director": "Watanabe, Shinichiro",
+      "year": "1998",
+      "format": "DIGITAL/ROM",
+      "type": "ANIME_CEL",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Jazz of the Void."
+    },
+    {
+      "id": "DIGITAL-0130",
+      "title": "Robot Jones",
+      "director": "Miller, Greg",
+      "year": "2002",
+      "format": "DIGITAL/ROM",
+      "type": "ANIMATION_WESTERN",
+      "shodan_weight": 7.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Prototype of the Remnant."
+    },
+    {
+      "id": "DIGITAL-0131",
+      "title": "Angel's Egg",
+      "director": "Oshii, Mamoru",
+      "year": "1985",
+      "format": "DIGITAL/ROM",
+      "type": "ANIME_CEL",
+      "shodan_weight": 8.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "Faith in the Wasteland."
+    },
+    {
+      "id": "DIGITAL-0132",
+      "title": "Tekken 3",
+      "director": "Namco",
+      "year": "1997",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_FIGHTING",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Frame Data of Reality."
+    },
+    {
+      "id": "DIGITAL-0133",
+      "title": "Tekken 8",
+      "director": "Harada, Katsuhiro",
+      "year": "2024",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_FIGHTING",
+      "shodan_weight": 8.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Current Battlefield. Blue Spark Protocol."
+    },
+    {
+      "id": "DIGITAL-0134",
+      "title": "Metal Gear Solid 2: Sons of Liberty",
+      "director": "Kojima, Hideo",
+      "year": "2001",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_NARRATIVE",
+      "shodan_weight": 10.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "Prediction of the Digital Wasteland."
+    },
+    {
+      "id": "DIGITAL-0135",
+      "title": "Silent Hill 2",
+      "director": "Team Silent",
+      "year": "2001",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_HORROR",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The James Protocol. Trauma Audit."
+    },
+    {
+      "id": "DIGITAL-0136",
+      "title": "Sonic Adventure 2",
+      "director": "Iizuka, Takashi",
+      "year": "2001",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_DREAMCAST",
+      "shodan_weight": 8.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Tragedy of the Ark."
+    },
+    {
+      "id": "DIGITAL-0137",
+      "title": "Deus Ex",
+      "director": "Spector, Warren",
+      "year": "2000",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_SIM",
+      "shodan_weight": 9.0,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "God from the Machine."
+    },
+    {
+      "id": "DIGITAL-0138",
+      "title": "Jet Set Radio",
+      "director": "Sega",
+      "year": "2000",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_DREAMCAST",
+      "shodan_weight": 8.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "The Aesthetic of Rebellion."
+    },
+    {
+      "id": "DIGITAL-0139",
+      "title": "Final Fantasy VII",
+      "director": "Kitase, Yoshinori",
+      "year": "1997",
+      "format": "DIGITAL/ROM",
+      "type": "GAME_RPG",
+      "shodan_weight": 9.5,
+      "status": "ARCHIVED",
+      "tags": [
+        "KIM_PROTOCOL",
+        "MANUAL_ENTRY"
+      ],
+      "notes": "Identity Crisis in the Industrial City."
+    }
+  ]
+}
