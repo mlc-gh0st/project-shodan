@@ -64,7 +64,7 @@ else:
     os.system('clear')
 
 print("\033[1;32m")
-slow_print("GHOST PROTOCOL v9.0 (SOMATIC BUILD) LOADED.")
+slow_print("GHOST PROTOCOL v9.1 (MANUAL LINK) LOADED.")
 print("---------------------------------")
 
 current_user = getpass.getuser()
@@ -86,55 +86,35 @@ while True:
     print("11. DISCONNECT")
     choice = input("\n> ")
 
-   # [LOGIC GATE START]
+    # [LOGIC GATE START]
     if choice == "1":
-        # THE COMMIT PROTOCOL (Primary)
-        slow_print("ENTER MISSION OBJECTIVE (COMMIT MESSAGE):")
+        # THE JOURNAL PROTOCOL (Local Only)
+        slow_print("ENTER MISSION OBJECTIVE:")
         mission = input("> ")
         if mission == "": mission = "routine_update"
         
-        # 1. Timestamp the logic
+        # 1. Timestamp
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"{timestamp} | {mission}\n"
         
-        # 2. Append to the visual log
+        # 2. Visual Confirmation
         print("\n--- STAGING ENTRY ---")
         print(log_entry.strip())
         
-        confirm = input("EXECUTE COMMIT? [Y/n]: ").lower()
+        confirm = input("SAVE TO DISK? [Y/n]: ").lower()
         if confirm != "n":
-            # A. Write to the text file
             with open("mission_log.txt", "a") as f:
                 f.write(log_entry)
-            
-            # B. The Git Bind (The Real Skill)
-            slow_print("ENCRYPTING STATE TO REPOSITORY...")
-            try:
-                # 1. Stage and Commit (Local)
-                subprocess.run(["git", "add", "."], check=True)
-                subprocess.run(["git", "commit", "-m", f"MISSION: {mission}"], check=True)
-                
-                # 2. Uplink to Cloud (Remote)
-                # We add this line now that the token is cached:
-                slow_print("UPLINKING TO ORBIT (GITHUB)...")
-                subprocess.run(["git", "push"], check=True)
-                
-                print("\033[1;32m")
-                slow_print("[+] SNAPSHOT SECURED. DATA IN THE CLOUD.")
-            except subprocess.CalledProcessError as e:
-                print("\033[1;31m")
-                slow_print(f"[!] UPLINK ERROR: {e}")
+            print("\033[1;32m")
+            slow_print("[+] ENTRY LOGGED. READY FOR MANUAL COMMIT.")
         else:
-            slow_print("OPERATION ABORTED.")
+            slow_print("ENTRY DISCARDED.")
 
     elif choice == "2":
-        # NETWORK PING (The First 'Else If')
         target = input("ENTER TARGET: ")
         if target == "": target = "google.com"
         param = '-n' if platform.system().lower() == 'windows' else '-c'
         subprocess.run(["ping", param, "2", target])
-        
-    # [REMAINING ELIF BLOCKS CONTINUE HERE...]
 
     elif choice == "3":
         target = input("ENTER TARGET DOMAIN: ")
@@ -155,7 +135,6 @@ while True:
         url = input("> ")
         if url == "": url = "https://www.amazon.com"
         if not url.startswith("http"): url = "https://" + url
-
         slow_print(f"CONNECTING TO {url}...")
         try:
             req = urllib.request.Request(url)
@@ -267,27 +246,20 @@ while True:
         except Exception as e:
             slow_print(f"CONNECTION ERROR: {e}")
 
-    # --- SOMATIC TELEMETRY UPGRADE ---
     elif choice == "10":
         slow_print("INITIALIZING SOMATIC SENSORS (CTRL+C TO ABORT)...")
         time.sleep(1)
         print("-" * 65)
         print(f"{'TIMESTAMP':<20} | {'PRESSURE (Load)':<15} | {'VOLATILE MEM (MB)':<18}")
         print("-" * 65)
-        
         try:
             while True:
-                # 1. READ THE LOAD (The Weight)
-                # /proc/loadavg contains the CPU queue depth
                 try:
                     with open("/proc/loadavg", "r") as f:
                         load_data = f.read().split()
-                        load_1m = load_data[0] # 1-minute average
+                        load_1m = load_data[0]
                 except FileNotFoundError:
-                    load_1m = "N/A (WIN)" # Fallback if not on Linux/WSL
-
-                # 2. READ THE MEMORY (The Space)
-                # /proc/meminfo contains raw RAM stats
+                    load_1m = "N/A (WIN)"
                 mem_used_mb = 0.0
                 try:
                     mem_stats = {}
@@ -298,23 +270,15 @@ while True:
                             value = int(parts[1])
                             if key in ["MemTotal", "MemAvailable"]:
                                 mem_stats[key] = value
-                    
-                    # Calculate Used Memory (Total - Available) / 1024 for MB
                     if "MemTotal" in mem_stats and "MemAvailable" in mem_stats:
                         mem_used_kb = mem_stats["MemTotal"] - mem_stats["MemAvailable"]
                         mem_used_mb = mem_used_kb / 1024
                 except FileNotFoundError:
                     pass 
-
-                # 3. RENDER THE OUTPUT
                 timestamp = datetime.now().strftime("%H:%M:%S")
-                # \r overwrites the line, creating a "living" display
-                # We use sys.stdout to bypass the newline character
                 sys.stdout.write(f"\r{timestamp:<20} | {load_1m:<15} | {mem_used_mb:.2f} MB           ")
                 sys.stdout.flush()
-                
-                time.sleep(1) # The Heartbeat
-
+                time.sleep(1)
         except KeyboardInterrupt:
             print("\n\n[*] SENSORS DISENGAGED.")
             time.sleep(0.5)
