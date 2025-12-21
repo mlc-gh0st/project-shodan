@@ -64,7 +64,7 @@ else:
     os.system('clear')
 
 print("\033[1;32m")
-slow_print("GHOST PROTOCOL v10.0 (MANUAL LINK) LOADED.")
+slow_print("GHOST PROTOCOL v10.1 (STABLE LINK) LOADED.")
 print("---------------------------------")
 
 current_user = getpass.getuser()
@@ -84,7 +84,13 @@ while True:
     print("9.  ATMOSPHERIC SENSORS")
     print("10. SOMATIC TELEMETRY (REAL-TIME)")
     print("11. DISCONNECT")
-    choice = input("\n> ")
+    
+    # [PATCH APPLIED HERE: SHIELDED INPUT]
+    try:
+        choice = input("\n> ")
+    except KeyboardInterrupt:
+        print("\n\n[*] CONNECTION SEVERED.")
+        break
 
     # [LOGIC GATE START]
     if choice == "1":
