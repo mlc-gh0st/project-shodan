@@ -13,6 +13,7 @@ import threading
 import platform
 import uuid 
 import hashlib
+import json
 from datetime import datetime
 
 # GLOBAL LOCK
@@ -57,6 +58,72 @@ def get_mac():
     mac = uuid.getnode()
     return ':'.join(('%012X' % mac)[i:i+2] for i in range(0, 12, 2))
 
+# [UPDATED MODULE: WEATHER RECON v2.0 (AUTO-TARGETING)]
+def weather_recon(city=None):
+    try:
+        # DYNAMIC TARGETING LOGIC
+        if city:
+            slow_print(f"CALIBRATING SENSORS FOR: {city.upper()}...")
+            city_encoded = urllib.parse.quote(city)
+            url = f"https://wttr.in/{city_encoded}?format=j1"
+        else:
+            slow_print("CALIBRATING SENSORS FOR: LOCAL SIGNAL (IP TRIANGULATION)...")
+            url = "https://wttr.in/?format=j1"
+        
+        req = urllib.request.Request(url)
+        req.add_header('User-Agent', 'GhostProtocol/10.3')
+        
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            
+            # PARSE TELEMETRY
+            current = data['current_condition'][0]
+            
+            # Extract Location Name from Nearest Area (Verification of IP Target)
+            try:
+                location_name = data['nearest_area'][0]['areaName'][0]['value']
+                region_name = data['nearest_area'][0]['region'][0]['value']
+                target_sector = f"{location_name}, {region_name}"
+            except:
+                target_sector = "UNKNOWN SECTOR"
+
+            temp_f = current['temp_F']
+            wind_speed = current['windspeedMiles']
+            wind_dir = current['winddir16Point']
+            desc = current['weatherDesc'][0]['value']
+            humidity = current['humidity']
+            visibility = current['visibility']
+            
+            # DISPLAY MATRIX
+            print("-" * 50)
+            print(f" SECTOR:        {target_sector.upper()}") 
+            print(f" CONDITIONS:    {desc.upper()}")
+            print(f" THERMAL:       {temp_f}°F")
+            print(f" WIND VECTOR:   {wind_speed} MPH [{wind_dir}]")
+            print(f" VISIBILITY:    {visibility} MILES")
+            print(f" HUMIDITY:      {humidity}%")
+            print("-" * 50)
+            
+            # THRESHOLD ALERTS (THE SENTINEL LOGIC)
+            alerts = []
+            if int(wind_speed) > 20:
+                alerts.append("HIGH WIND VELOCITY")
+            if "snow" in desc.lower() or "squall" in desc.lower() or "ice" in desc.lower():
+                alerts.append("FROZEN PRECIPITATION")
+            if int(visibility) < 2:
+                alerts.append("LOW VISIBILITY (BLINDING)")
+                
+            if alerts:
+                print("\033[1;31m") # RED ALERT
+                for alert in alerts:
+                    slow_print(f"[!] WARNING: {alert} DETECTED")
+                print("\033[1;32m") # RETURN TO GREEN
+            else:
+                slow_print("[*] ATMOSPHERE STABLE.")
+                
+    except Exception as e:
+        slow_print(f"[-] SENSOR MALFUNCTION: {e}")
+
 # SYSTEM STARTUP
 if platform.system().lower() == 'windows':
     os.system('cls')
@@ -64,7 +131,7 @@ else:
     os.system('clear')
 
 print("\033[1;32m")
-slow_print("GHOST PROTOCOL v10.1 (STABLE LINK) LOADED.")
+slow_print("GHOST PROTOCOL v10.3 (AUTO-TARGET) LOADED.")
 print("---------------------------------")
 
 current_user = getpass.getuser()
@@ -81,32 +148,24 @@ while True:
     print("6.  SYSTEM RECON")
     print("7.  HASH GENERATOR")
     print("8.  BRUTE FORCE SIMULATOR")
-    print("9.  ATMOSPHERIC SENSORS")
+    print("9.  ATMOSPHERIC SENSORS (AUTO/MANUAL)")
     print("10. SOMATIC TELEMETRY (REAL-TIME)")
     print("11. DISCONNECT")
     
-    # [PATCH APPLIED HERE: SHIELDED INPUT]
     try:
         choice = input("\n> ")
     except KeyboardInterrupt:
         print("\n\n[*] CONNECTION SEVERED.")
         break
 
-    # [LOGIC GATE START]
     if choice == "1":
-        # THE JOURNAL PROTOCOL (Local Only - No Git Automation)
         slow_print("ENTER MISSION OBJECTIVE:")
         mission = input("> ")
         if mission == "": mission = "routine_update"
-        
-        # 1. Timestamp
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"{timestamp} | {mission}\n"
-        
-        # 2. Visual Confirmation
         print("\n--- STAGING ENTRY ---")
         print(log_entry.strip())
-        
         confirm = input("SAVE TO DISK? [Y/n]: ").lower()
         if confirm != "n":
             with open("mission_log.txt", "a") as f:
@@ -235,22 +294,13 @@ while True:
             slow_print("\n[-] ATTACK FAILED. PASSWORD NOT IN DICTIONARY.")
 
     elif choice == "9":
-        slow_print("ENTER TARGET CITY (e.g. London):")
-        city = input("> ")
-        if city == "": city = "London"
-        city_encoded = urllib.parse.quote(city)
-        slow_print(f"CONNECTING TO SATELLITE FEED FOR: {city.upper()}...")
-        try:
-            url = f"https://wttr.in/{city_encoded}?format=3"
-            req = urllib.request.Request(url)
-            req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124')
-            response = urllib.request.urlopen(req, timeout=5)
-            weather_data = response.read().decode('utf-8').strip()
-            print("---------------------------------")
-            print(f"DATA RECEIVED: {weather_data}")
-            print("---------------------------------")
-        except Exception as e:
-            slow_print(f"CONNECTION ERROR: {e}")
+        slow_print("ENTER TARGET SECTOR (Leave blank for AUTO-DETECT):")
+        user_input = input("> ")
+        # [UPDATED: Pass valid string or None]
+        if user_input.strip() == "":
+            weather_recon(None)
+        else:
+            weather_recon(user_input)
 
     elif choice == "10":
         slow_print("INITIALIZING SOMATIC SENSORS (CTRL+C TO ABORT)...")
