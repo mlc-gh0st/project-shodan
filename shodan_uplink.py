@@ -24,7 +24,8 @@ SACRED_CANON = {
     "metal gear solid 2": 10.0,
     "sonic adventure 2": 8.0,
     "akira": 10.0,
-    "ghost in the shell": 9.5
+    "ghost in the shell": 9.5,
+    "cowboy bebop": 10.0
 }
 
 # 2. THE HIGH PRIESTS
@@ -34,11 +35,11 @@ HEAVY_HITTERS = [
     "Malick", "Trier", "Lynch", "Oshii", "Anno", "Kojima",
     "Wachowski", "Sega", "Team Silent", "Namco", "Cronenberg",
     "Gibson", "Cameron", "Verhoeven", 
-    "Madhouse", "Kawajiri", "Koike" # The Redline Architect
+    "Madhouse", "Kawajiri", "Koike", "Watanabe"
 ]
 
 # 3. RESONANCE KEYS (Thematic Triggers)
-# [UPDATED] Added Racing / Velocity / Tournament Tokens
+# [UPDATED] Added Hip-Hop, Samurai, Funk for Champloo/Dandy resonance
 RESONANCE_KEYS = {
     "Cyberpunk": 1.5, "Dystopia": 1.0, "Surreal": 1.0,
     "Animation": 0.5, "Cult": 1.0, "Hacker": 1.5,
@@ -50,7 +51,9 @@ RESONANCE_KEYS = {
     "Vampire": 1.5, "Gothic": 1.5, "Post-Apocalyptic": 1.5,
     "Hunter": 0.5, "Occult": 1.0, "Demon": 1.0,
     "Racing": 2.0, "Speed": 1.0, "Tournament": 1.0, 
-    "Car": 0.5, "Hand-Drawn": 1.5
+    "Car": 0.5, "Hand-Drawn": 1.5,
+    "Jazz": 1.5, "Space Western": 1.5, "Bounty Hunter": 1.0,
+    "Samurai": 1.5, "Hip-Hop": 1.5, "Funk": 1.0
 }
 
 def log(tag, message, color=C_RESET):
@@ -145,11 +148,22 @@ def main():
 
         # 2. PROCESS SIGNAL
         if data:
-            title = data.get('Title'); director = data.get('Director'); year = data.get('Year')[:4]
+            title = data.get('Title'); 
+            
+            # [PATCH] CREATOR FALLBACK PROTOCOL
+            # If Director is missing (common in Anime Series), check Writer.
+            director = data.get('Director', 'N/A')
+            if director == "N/A":
+                director = data.get('Writer', 'N/A')
+                
+            year = data.get('Year')[:4]
             country = data.get('Country'); genre = data.get('Genre'); plot = data.get('Plot')
             
             print(f"\n{C_GREEN}/// DATA RETRIEVED ///{C_RESET}")
-            print(f"   TITLE:    {title}\n   DIRECTOR: {director}\n   YEAR:     {year}\n   GENRE:    {genre}")
+            print(f"   TITLE:    {title}")
+            print(f"   CREATOR:  {director}") # Renamed for accuracy
+            print(f"   YEAR:     {year}")
+            print(f"   GENRE:    {genre}")
             
             weight = calculate_shodan_weight(title, director, year, country, "Digital", genre, plot)
             
