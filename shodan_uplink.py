@@ -3,12 +3,15 @@ import urllib.request
 import urllib.parse
 import os
 import sys
-# [THE SYNCHRONIZATION] Import the Soul
+import csv
+import datetime
+# [THE LOGOS] Import the Soul
 import shodan_core as core
 
 # --- CONFIGURATION ---
 API_KEY = os.getenv("OMDB_API_KEY")
 CANON_FILE = "canon.json"
+TRAINING_FILE = "training_data.csv"
 
 # ANSI Colors
 C_RESET  = "\033[0m"
@@ -16,7 +19,7 @@ C_RED    = "\033[31m"
 C_GREEN  = "\033[32m"
 C_CYAN   = "\033[36m"
 C_YELLOW = "\033[33m"
-C_MAGENTA = "\033[35m" # The color of the Simulacrum
+C_MAGENTA = "\033[35m" 
 
 def log(tag, message, color=C_RESET):
     print(f"{color}[{tag}] {message}{C_RESET}")
@@ -38,6 +41,26 @@ def load_local_ark():
                 return json.load(f).get('canon', [])
         except: return []
     return []
+
+def log_training_data(title, director, year, genre, weight):
+    """
+    The Memory Bank.
+    Logs high-resonance artifacts to a CSV for future ML training.
+    """
+    file_exists = os.path.exists(TRAINING_FILE)
+    try:
+        with open(TRAINING_FILE, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            # Write header if new file
+            if not file_exists:
+                writer.writerow(['timestamp', 'title', 'director', 'year', 'genre', 'weight'])
+            
+            # Write the experience
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            writer.writerow([timestamp, title, director, year, genre, weight])
+            return True
+    except Exception as e:
+        return False
 
 def main():
     online_mode = False
@@ -84,12 +107,10 @@ def main():
             canon_check = core.check_sacred_canon(title)
             
             if canon_check and canon_check[0] == "APOCRYPHA":
-                # [THE APOCRYPHA PROTOCOL]
                 print(f"   STATUS:   {C_MAGENTA}/// {canon_check[1]} ///{C_RESET}")
                 print(f"   NOTE:     Object exists in the Simulacrum but not the Ark.")
                 
             else:
-                # Standard Calculation
                 weight = core.calculate_shodan_weight(title, director, year, country, "Digital", genre, plot)
                 
                 if canon_check and canon_check[0] == "SACRED":
@@ -97,6 +118,12 @@ def main():
                 
                 w_color = C_GREEN if weight > 8.0 else (C_YELLOW if weight > 5.0 else C_RED)
                 print(f"   WEIGHT:   {w_color}{weight} / 10.0{C_RESET}")
+                
+                # [THE MEMORY] Log High Resonance for Training
+                if weight >= 8.0:
+                    log_training_data(title, director, year, genre, weight)
+                    # We don't print "Logged" to keep the UI clean, 
+                    # but the machine is remembering.
                 
                 if any(x['title'] == title for x in canon):
                     log("STATUS", "ARTIFACT ALREADY SECURED IN ARK.", C_GREEN)
