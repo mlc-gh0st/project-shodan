@@ -4,18 +4,37 @@ import re
 
 # 1. THE SACRED CANON
 SACRED_CANON = {
-    "whatever happened to robot jones?": 8.0,
-    "jet set radio": 8.5,
-    "tekken 3": 9.0,
-    "metal gear solid 2: sons of liberty": 10.0,
-    "metal gear solid 2": 10.0,
-    "sonic adventure 2": 8.0,
-    "akira": 10.0,
-    "ghost in the shell": 9.5,
-    "cowboy bebop": 10.0
+    # --- THE GAMES (Title Trust Only) ---
+    "jet set radio": {"weight": 8.5},
+    "tekken 3": {"weight": 9.0},
+    "metal gear solid 2: sons of liberty": {"weight": 10.0},
+    "metal gear solid 2": {"weight": 10.0},
+    "sonic adventure 2": {"weight": 8.0},
+    
+    # --- THE ANIME/TV (Strict Metadata Enforcement) ---
+    "whatever happened to robot jones?": {
+        "weight": 8.0, 
+        "year": "2002", 
+        "director": "Greg Miller" 
+    },
+    "akira": {
+        "weight": 10.0, 
+        "year": "1988", 
+        "director": "Katsuhiro" 
+    },
+    "ghost in the shell": {
+        "weight": 9.5, 
+        "year": "1995", 
+        "director": "Oshii" 
+    },
+    "cowboy bebop": {
+        "weight": 10.0, 
+        "year": "1998", 
+        "director": "Watanabe" 
+    }
 }
 
-# 2. THE APOCRYPHA (Hidden/Shadow Canon)
+# 2. THE APOCRYPHA
 APOCRYPHA = {
     "haunting ground": "SIMULACRUM ARTIFACT (G4TV ARCHIVE)",
     "rule of rose": "SIMULACRUM ARTIFACT (PS2 MYTHOS)",
@@ -23,7 +42,7 @@ APOCRYPHA = {
     "michigan: report from hell": "SIMULACRUM ARTIFACT (SUDA51 ECHO)"
 }
 
-# 3. THE HIGH PRIESTS (Directors)
+# 3. THE HIGH PRIESTS
 HEAVY_HITTERS = [
     "Kurosawa", "Bergman", "Godard", "Tarkovsky", "Kubrick", 
     "Hitchcock", "Dreyer", "Ozu", "Fellini", "Lang", 
@@ -34,7 +53,7 @@ HEAVY_HITTERS = [
     "Villeneuve", "Nolan", "Miller", "Refn"
 ]
 
-# 4. THE TEKTONS (Actors - The Bodies of Deployment)
+# 4. THE TEKTONS
 TEKTONS = [
     "Ryan Gosling", "Keanu Reeves", "Tom Hardy", 
     "Christian Bale", "Scarlett Johansson", "Willem Dafoe",
@@ -62,53 +81,58 @@ RESONANCE_KEYS = {
     "Synthwave": 2.5, "Retrowave": 2.0, "Outrun": 2.0
 }
 
-def check_sacred_canon(title):
-    if not title: return None
-    clean_title = "".join(c for c in title.lower() if c.isalnum())
+def normalize_key(title):
+    if not title: return ""
+    return "".join(c for c in title.lower() if c.isalnum())
+
+def get_sacred_data(title):
+    """Retrieves the raw Sacred Canon data if the title matches."""
+    clean_title = normalize_key(title)
+    for key, data in SACRED_CANON.items():
+        if normalize_key(key) == clean_title:
+            return data
+    return None
+
+def check_sacred_canon(title, year=None, director=None):
+    clean_title = normalize_key(title)
     
-    for key, weight in SACRED_CANON.items():
-        clean_key = "".join(c for c in key.lower() if c.isalnum())
-        if clean_title == clean_key: return ("SACRED", weight)
+    for key, data in SACRED_CANON.items():
+        if normalize_key(key) == clean_title:
+            # IDENTITY CHECK
+            if "year" in data:
+                if not year or data["year"] not in str(year):
+                    continue 
+            
+            if "director" in data:
+                if not director or data["director"].lower() not in director.lower():
+                    continue
+
+            return ("SACRED", data["weight"])
         
     for key, status in APOCRYPHA.items():
-        clean_key = "".join(c for c in key.lower() if c.isalnum())
-        if clean_title == clean_key: return ("APOCRYPHA", status)
+        if normalize_key(key) == clean_title: return ("APOCRYPHA", status)
         
     return None
 
 def calculate_awards_weight(awards_str):
-    """
-    Parses the OMDb Awards string for ironic points.
-    Win Oscar = +0.1
-    Other Win/Nomination = +0.01
-    """
     if not awards_str or awards_str == "N/A": return 0.0
-    
     weight = 0.0
-    
-    # Check for Oscars
     oscar_match = re.search(r'Won (\d+) Oscar', awards_str)
     if oscar_match:
         weight += int(oscar_match.group(1)) * 0.1
-        
-    # Check for total wins/nominations (Statistical Noise)
     numbers = re.findall(r'(\d+) win', awards_str)
     for n in numbers: weight += int(n) * 0.01
-    
     numbers = re.findall(r'(\d+) nomination', awards_str)
     for n in numbers: weight += int(n) * 0.01
-    
     return weight
 
 def calculate_shodan_weight(title, director, year_str, country, fmt="Digital", genre="", plot="", actors="", awards=""):
-    check = check_sacred_canon(title)
+    check = check_sacred_canon(title, year_str, director)
     if check:
         if check[0] == "SACRED": return check[1]
         if check[0] == "APOCRYPHA": return 0.0 
 
     weight = 5.0
-    
-    # 1. DURABILITY
     try:
         year = int(year_str)
         if year < 1960: weight += 2.0
@@ -117,15 +141,12 @@ def calculate_shodan_weight(title, director, year_str, country, fmt="Digital", g
         elif year <= 2020: weight += 0.5
     except ValueError: pass 
 
-    # 2. HIGH PRIESTS (Directors)
     if any(h.lower() in director.lower() for h in HEAVY_HITTERS):
         weight += 2.0
 
-    # 3. THE TEKTONS (Actors)
     if any(t.lower() in actors.lower() for t in TEKTONS):
         weight += 1.5
 
-    # 4. RESONANCE
     content_signal = (genre + " " + plot).lower()
     for key, value in RESONANCE_KEYS.items():
         if key.lower() in content_signal:
@@ -133,11 +154,9 @@ def calculate_shodan_weight(title, director, year_str, country, fmt="Digital", g
             if weight >= 9.8: 
                 weight = 9.8
                 break
-                
-    # 5. IRONIC AWARDS
+
     weight += calculate_awards_weight(awards)
 
-    # 6. ORIGIN & FORMAT
     if "USA" not in country and "United States" not in country: weight += 0.5
     if "Blu-Ray" in fmt: weight += 0.5
 

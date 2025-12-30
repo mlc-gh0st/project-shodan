@@ -1,6 +1,5 @@
 timestamp,title,director,year,genre,weight
 2025-12-29 20:59:28,Akira,Katsuhiro Ôtomo,1988,"Animation, Action, Drama",10.0
-2025-12-29 20:59:48,Ghost in the Shell,Rupert Sanders,2017,"Action, Crime, Drama",9.5
 2025-12-29 20:59:52,The Matrix,"Lana Wachowski, Lilly Wachowski",1999,"Action, Sci-Fi",9.5
 2025-12-29 20:59:55,The Terminator,James Cameron,1984,"Action, Adventure, Sci-Fi",9.5
 2025-12-29 21:00:01,Vampire Hunter D,Toyoo Ashida,1985,"Animation, Action, Fantasy",9.0
@@ -12,3 +11,6 @@ timestamp,title,director,year,genre,weight
 2025-12-29 22:00:02,Titanic,James Cameron,1997,"Drama, Romance",10.0
 2025-12-29 22:00:08,Terminator 2: Judgment Day,James Cameron,1991,"Action, Adventure, Sci-Fi",10.0
 2025-12-29 22:05:36,Following,Christopher Nolan,1998,"Crime, Mystery, Thriller",8.1
+2025-12-29 23:04:31,Timecop,Peter Hyams,1994,"Action, Crime, Sci-Fi",8.1
+2025-12-29 23:26:16,Ghost in the Shell,Mamoru Oshii,1995,"Animation, Action, Crime",9.5
+2025-12-29 23:26:20,Ghost in the Shell 2: Innocence,"Mamoru Oshii, Naoko Kusumi, Mizuho Nishikubo",2004,"Animation, Drama, Mystery",10.0
