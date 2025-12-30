@@ -16,334 +16,293 @@ import hashlib
 import json
 from datetime import datetime
 
-# GLOBAL LOCK
+# --- THIRD PARTY LIBS ---
+try:
+    from rich.console import Console
+    from rich.panel import Panel
+    from rich.table import Table
+    from rich.live import Live
+    from rich.text import Text
+    from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
+    from rich.layout import Layout
+    from rich.theme import Theme
+except ImportError:
+    print("CRITICAL ERROR: 'rich' library not found. Run: pip install rich")
+    sys.exit(1)
+
+# --- CONFIGURATION & AESTHETICS ---
+# THEME: Deep Blue/Cyan (Project Shodan/Ghost Protocol)
+ghost_theme = Theme({
+    "info": "cyan",
+    "warning": "bold yellow",
+    "danger": "bold red",
+    "sacred": "bold blue italic",
+    "protocol": "bold cyan",
+    "input": "bold white",
+    "grey": "dim white"
+})
+
+console = Console(theme=ghost_theme)
 print_lock = threading.Lock()
 
-def slow_print(text, speed=0.02):
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(speed)
-    print()
-
-def scan_port(target_ip, port):
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        result = sock.connect_ex((target_ip, port))
-        if result == 0:
-            with print_lock:
-                print(f"[+] PORT {port}: OPEN (VULNERABILITY DETECTED)")
-        sock.close()
-    except:
-        pass
-
-def raw_whois(server, query):
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(10)
-        s.connect((server, 43))
-        s.send(f"{query}\r\n".encode())
-        response = b""
-        while True:
-            data = s.recv(4096)
-            if not data: break
-            response += data
-        s.close()
-        return response.decode('utf-8', errors='ignore')
-    except Exception as e:
-        return f"Error: {e}"
+# --- UTILITIES ---
 
 def get_mac():
     mac = uuid.getnode()
     return ':'.join(('%012X' % mac)[i:i+2] for i in range(0, 12, 2))
 
-# [UPDATED MODULE: WEATHER RECON v2.0 (AUTO-TARGETING)]
-def weather_recon(city=None):
+def scan_port(target_ip, port, open_ports):
     try:
-        # DYNAMIC TARGETING LOGIC
-        if city:
-            slow_print(f"CALIBRATING SENSORS FOR: {city.upper()}...")
-            city_encoded = urllib.parse.quote(city)
-            url = f"https://wttr.in/{city_encoded}?format=j1"
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(0.5)
+        result = sock.connect_ex((target_ip, port))
+        if result == 0:
+            with print_lock:
+                open_ports.append(port)
+        sock.close()
+    except:
+        pass
+
+# --- MODULES ---
+
+def module_archive_mission():
+    mission = console.input("[bold blue]ENTER OBJECTIVE: [/bold blue]")
+    if not mission: mission = "routine_maintenance"
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    log_entry = f"{timestamp} | {mission}"
+    console.print(Panel(log_entry, title="[bold cyan]STAGING ENTRY[/bold cyan]", border_style="blue"))
+    
+    confirm = console.input("[grey]COMMIT TO DISK? [Y/n]: [/grey]").lower()
+    if confirm != "n":
+        with open("mission_log.txt", "a") as f:
+            f.write(log_entry + "\n")
+        console.print("[bold green][+] MISSION LOGGED.[/bold green]")
+    else:
+        console.print("[bold red][-] ENTRY DISCARDED.[/bold red]")
+
+def module_ping():
+    target = console.input("[bold blue]TARGET IP/DOMAIN: [/bold blue]") or "google.com"
+    param = '-n' if platform.system().lower() == 'windows' else '-c'
+    console.print(f"[grey]Pinging {target}...[/grey]")
+    subprocess.run(["ping", param, "2", target])
+
+def module_port_scanner():
+    target = console.input("[bold blue]TARGET DOMAIN: [/bold blue]") or "google.com"
+    try:
+        target_ip = socket.gethostbyname(target)
+        console.print(f"[bold cyan]TARGET LOCKED: {target_ip}[/bold cyan]")
+        
+        open_ports = []
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            BarColumn(),
+            TextColumn("{task.percentage:>3.0f}%"),
+            console=console
+        ) as progress:
+            task = progress.add_task(f"[cyan]Scanning Ports 1-1024...", total=1024)
+            with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+                futures = [executor.submit(scan_port, target_ip, port, open_ports) for port in range(1, 1025)]
+                for _ in concurrent.futures.as_completed(futures):
+                    progress.advance(task)
+        
+        if open_ports:
+            table = Table(title=f"OPEN PORTS: {target}", border_style="red")
+            table.add_column("Port", style="red")
+            table.add_column("Status", style="bold red")
+            for p in sorted(open_ports):
+                table.add_row(str(p), "OPEN / VULNERABLE")
+            console.print(table)
         else:
-            slow_print("CALIBRATING SENSORS FOR: LOCAL SIGNAL (IP TRIANGULATION)...")
-            url = "https://wttr.in/?format=j1"
-        
-        req = urllib.request.Request(url)
-        req.add_header('User-Agent', 'GhostProtocol/10.3')
-        
-        with urllib.request.urlopen(req, timeout=5) as response:
-            data = json.loads(response.read().decode('utf-8'))
-            
-            # PARSE TELEMETRY
-            current = data['current_condition'][0]
-            
-            # Extract Location Name from Nearest Area (Verification of IP Target)
-            try:
-                location_name = data['nearest_area'][0]['areaName'][0]['value']
-                region_name = data['nearest_area'][0]['region'][0]['value']
-                target_sector = f"{location_name}, {region_name}"
-            except:
-                target_sector = "UNKNOWN SECTOR"
+            console.print("[bold green]NO OPEN PORTS DETECTED.[/bold green]")
 
-            temp_f = current['temp_F']
-            wind_speed = current['windspeedMiles']
-            wind_dir = current['winddir16Point']
-            desc = current['weatherDesc'][0]['value']
-            humidity = current['humidity']
-            visibility = current['visibility']
-            
-            # DISPLAY MATRIX
-            print("-" * 50)
-            print(f" SECTOR:        {target_sector.upper()}") 
-            print(f" CONDITIONS:    {desc.upper()}")
-            print(f" THERMAL:       {temp_f}°F")
-            print(f" WIND VECTOR:   {wind_speed} MPH [{wind_dir}]")
-            print(f" VISIBILITY:    {visibility} MILES")
-            print(f" HUMIDITY:      {humidity}%")
-            print("-" * 50)
-            
-            # THRESHOLD ALERTS (THE SENTINEL LOGIC)
-            alerts = []
-            if int(wind_speed) > 20:
-                alerts.append("HIGH WIND VELOCITY")
-            if "snow" in desc.lower() or "squall" in desc.lower() or "ice" in desc.lower():
-                alerts.append("FROZEN PRECIPITATION")
-            if int(visibility) < 2:
-                alerts.append("LOW VISIBILITY (BLINDING)")
-                
-            if alerts:
-                print("\033[1;31m") # RED ALERT
-                for alert in alerts:
-                    slow_print(f"[!] WARNING: {alert} DETECTED")
-                print("\033[1;32m") # RETURN TO GREEN
-            else:
-                slow_print("[*] ATMOSPHERE STABLE.")
-                
-    except Exception as e:
-        slow_print(f"[-] SENSOR MALFUNCTION: {e}")
+    except socket.gaierror:
+        console.print("[bold red]ERROR: HOST RESOLUTION FAILED.[/bold red]")
 
-# SYSTEM STARTUP
-if platform.system().lower() == 'windows':
-    os.system('cls')
-else:
-    os.system('clear')
+def module_page_title():
+    url = console.input("[bold blue]TARGET URL: [/bold blue]") or "https://www.amazon.com"
+    if not url.startswith("http"): url = "https://" + url
+    
+    with console.status(f"[cyan]Intercepting Signal: {url}...[/cyan]"):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as response:
+                html = response.read().decode('utf-8', errors='ignore')
+                pattern = re.search('<title>(.*?)</title>', html, flags=re.IGNORECASE)
+                if pattern:
+                    console.print(Panel(f"[bold white]{pattern.group(1).strip()}[/bold white]", title="PAGE TITLE", border_style="green"))
+                else:
+                    console.print("[warning]NO TITLE SIGNAL FOUND.[/warning]")
+        except Exception as e:
+            console.print(f"[danger]CONNECTION FAILED: {e}[/danger]")
 
-print("\033[1;32m")
-slow_print("GHOST PROTOCOL v10.3 (AUTO-TARGET) LOADED.")
-print("---------------------------------")
-
-current_user = getpass.getuser()
-slow_print(f"OPERATOR: {current_user}")
-slow_print(f"KERNEL:   {platform.release()}")
-
-while True:
-    print("\nSELECT OPERATION:")
-    print("1.  ARCHIVE MISSION (LOGOS - LOCAL)")
-    print("2.  NETWORK PING (ECHO)")
-    print("3.  PORT SCANNER (THREADED)")
-    print("4.  EXTRACT PAGE TITLE")
-    print("5.  WHOIS LOOKUP")
-    print("6.  SYSTEM RECON")
-    print("7.  HASH GENERATOR")
-    print("8.  BRUTE FORCE SIMULATOR")
-    print("9.  ATMOSPHERIC SENSORS (AUTO/MANUAL)")
-    print("10. SOMATIC TELEMETRY (REAL-TIME)")
-    print("11. DISCONNECT")
+def module_system_recon():
+    console.print("[bold blue]GATHERING LOCAL TELEMETRY...[/bold blue]")
+    
+    table = Table(show_header=False, box=None)
+    table.add_row("[cyan]OS TYPE:[/cyan]", f"{platform.system()} {platform.release()}")
+    table.add_row("[cyan]KERNEL:[/cyan]", platform.version())
+    table.add_row("[cyan]HOSTNAME:[/cyan]", socket.gethostname())
+    table.add_row("[cyan]MAC ADDR:[/cyan]", get_mac())
     
     try:
-        choice = input("\n> ")
-    except KeyboardInterrupt:
-        print("\n\n[*] CONNECTION SEVERED.")
-        break
+        external_ip = urllib.request.urlopen('https://api.ipify.org', timeout=3).read().decode('utf8')
+        table.add_row("[cyan]PUBLIC IP:[/cyan]", f"[bold red]{external_ip}[/bold red]")
+    except:
+        table.add_row("[cyan]PUBLIC IP:[/cyan]", "[dim]UNAVAILABLE[/dim]")
 
-    if choice == "1":
-        slow_print("ENTER MISSION OBJECTIVE:")
-        mission = input("> ")
-        if mission == "": mission = "routine_update"
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        log_entry = f"{timestamp} | {mission}\n"
-        print("\n--- STAGING ENTRY ---")
-        print(log_entry.strip())
-        confirm = input("SAVE TO DISK? [Y/n]: ").lower()
-        if confirm != "n":
-            with open("mission_log.txt", "a") as f:
-                f.write(log_entry)
-            print("\033[1;32m")
-            slow_print("[+] ENTRY LOGGED. READY FOR MANUAL COMMIT.")
-        else:
-            slow_print("ENTRY DISCARDED.")
+    console.print(Panel(table, title="SYSTEM RECON", border_style="blue"))
 
-    elif choice == "2":
-        target = input("ENTER TARGET: ")
-        if target == "": target = "google.com"
-        param = '-n' if platform.system().lower() == 'windows' else '-c'
-        subprocess.run(["ping", param, "2", target])
-
-    elif choice == "3":
-        target = input("ENTER TARGET DOMAIN: ")
-        if target == "": target = "google.com"
-        try:
-            target_ip = socket.gethostbyname(target)
-            slow_print(f"TARGET RESOLVED: {target_ip}")
-            slow_print("INITIALIZING 100 THREADS...")
-            with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-                for port in range(1, 1025):
-                    executor.submit(scan_port, target_ip, port)
-            slow_print("SCAN COMPLETE.")
-        except socket.gaierror:
-            slow_print("ERROR: COULD NOT RESOLVE HOST.")
-
-    elif choice == "4":
-        slow_print("ENTER TARGET URL:")
-        url = input("> ")
-        if url == "": url = "https://www.amazon.com"
-        if not url.startswith("http"): url = "https://" + url
-        slow_print(f"CONNECTING TO {url}...")
-        try:
-            req = urllib.request.Request(url)
-            req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124')
-            response = urllib.request.urlopen(req, timeout=5)
-            html_content = response.read().decode('utf-8', errors='ignore')
-            pattern = re.search('<title>(.*?)</title>', html_content, flags=re.IGNORECASE)
-            if pattern:
-                slow_print(f"TARGET IDENTIFIED: {pattern.group(1).strip()}")
-            else:
-                slow_print("WARNING: NO TITLE SIGNAL FOUND.")
-        except Exception as e:
-            slow_print(f"CONNECTION FAILED: {e}")
-
-    elif choice == "5":
-        target = input("ENTER DOMAIN (e.g., google.com): ")
-        if target == "": target = "google.com"
-        slow_print("CONTACTING ROOT SERVER (IANA)...")
-        iana_response = raw_whois("whois.iana.org", target)
-        referral = re.search(r'refer:\s*(.*)', iana_response, re.IGNORECASE)
-        if referral:
-            whois_server = referral.group(1).strip()
-            slow_print(f"REDIRECTING TO: {whois_server}")
-            print("---------------------------------")
-            print(raw_whois(whois_server, target))
-        else:
-            print("---------------------------------")
-            print(iana_response)
-        slow_print("WHOIS DATA STREAM COMPLETE.")
-
-    elif choice == "6":
-        slow_print("GATHERING SYSTEM TELEMETRY...")
-        time.sleep(1)
-        print("---------------------------------")
-        print(f"OS TYPE:     {platform.system()} {platform.release()}")
-        print(f"OS VERSION:  {platform.version()}")
-        print(f"MACHINE:     {platform.machine()}")
-        print(f"HOSTNAME:    {socket.gethostname()}")
-        print(f"MAC ADDRESS: {get_mac()}")
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            internal_ip = s.getsockname()[0]
-            s.close()
-            print(f"INTERNAL IP: {internal_ip}")
-        except:
-            print("INTERNAL IP: UNKNOWN")
-        try:
-            external_ip = urllib.request.urlopen('https://api.ipify.org', timeout=3).read().decode('utf8')
-            print(f"PUBLIC IP:   {external_ip}")
-        except:
-            print("PUBLIC IP:   CONNECTION TIMED OUT")
-        print("---------------------------------")
-
-    elif choice == "7":
-        slow_print("ENTER TEXT TO HASH:")
-        secret = input("> ")
-        if secret == "": secret = "password123"
-        md5_val = hashlib.md5(secret.encode()).hexdigest()
-        sha256_val = hashlib.sha256(secret.encode()).hexdigest()
-        print("---------------------------------")
-        print(f"INPUT:    {secret}")
-        print(f"MD5:      {md5_val}")
-        print(f"SHA-256:  {sha256_val}")
-        print("---------------------------------")
-        slow_print("CRYPTOGRAPHIC SIGNATURES GENERATED.")
-
-    elif choice == "8":
-        slow_print("ENTER PASSWORD TO SIMULATE HACK:")
-        target_password = input("> ")
-        if target_password == "": target_password = "admin"
-        target_hash = hashlib.md5(target_password.encode()).hexdigest()
-        slow_print(f"TARGET HASH LOCKED: {target_hash}")
-        wordlist = ["password", "123456", "admin", "welcome", "love", "secret", "god", "help", "letmein"]
-        slow_print("INITIATING DICTIONARY ATTACK...")
-        time.sleep(1)
-        found = False
-        start_time = time.time()
-        for word in wordlist:
-            guess_hash = hashlib.md5(word.encode()).hexdigest()
-            print(f"TRYING: {word} \t [{guess_hash}]")
-            time.sleep(0.1)
-            if guess_hash == target_hash:
-                end_time = time.time()
-                print("\033[1;31m")
-                print(f"\n[!] MATCH FOUND: {word}")
-                print(f"TIME ELAPSED: {round(end_time - start_time, 2)} SECONDS")
-                print("\033[1;32m")
-                found = True
-                break
-        if not found:
-            slow_print("\n[-] ATTACK FAILED. PASSWORD NOT IN DICTIONARY.")
-
-    elif choice == "9":
-        slow_print("ENTER TARGET SECTOR (Leave blank for AUTO-DETECT):")
-        user_input = input("> ")
-        # [UPDATED: Pass valid string or None]
-        if user_input.strip() == "":
-            weather_recon(None)
-        else:
-            weather_recon(user_input)
-
-    elif choice == "10":
-        slow_print("INITIALIZING SOMATIC SENSORS (CTRL+C TO ABORT)...")
-        time.sleep(1)
-        print("-" * 65)
-        print(f"{'TIMESTAMP':<20} | {'PRESSURE (Load)':<15} | {'VOLATILE MEM (MB)':<18}")
-        print("-" * 65)
-        try:
-            while True:
-                try:
-                    with open("/proc/loadavg", "r") as f:
-                        load_data = f.read().split()
-                        load_1m = load_data[0]
-                except FileNotFoundError:
-                    load_1m = "N/A (WIN)"
-                mem_used_mb = 0.0
-                try:
-                    mem_stats = {}
-                    with open("/proc/meminfo", "r") as f:
-                        for line in f:
-                            parts = line.split()
-                            key = parts[0].strip(":")
-                            value = int(parts[1])
-                            if key in ["MemTotal", "MemAvailable"]:
-                                mem_stats[key] = value
-                    if "MemTotal" in mem_stats and "MemAvailable" in mem_stats:
-                        mem_used_kb = mem_stats["MemTotal"] - mem_stats["MemAvailable"]
-                        mem_used_mb = mem_used_kb / 1024
-                except FileNotFoundError:
-                    pass 
-                timestamp = datetime.now().strftime("%H:%M:%S")
-                sys.stdout.write(f"\r{timestamp:<20} | {load_1m:<15} | {mem_used_mb:.2f} MB           ")
-                sys.stdout.flush()
-                time.sleep(1)
-        except KeyboardInterrupt:
-            print("\n\n[*] SENSORS DISENGAGED.")
-            time.sleep(0.5)
-
-    elif choice == "11":
-        slow_print("SEVERING CONNECTION...")
-        break 
-
+def module_read_diary():
+    console.print("[bold blue]--- ARCHIVE ACCESS ---[/bold blue]")
+    if os.path.exists("diary.txt"):
+        with open("diary.txt", "r") as f:
+            content = f.read()
+        # Display content in a sacred panel
+        console.print(Panel(content, title="diary.txt", border_style="green", style="italic white"))
     else:
-        print("INVALID COMMAND")
+        console.print("[warning]FILE 'diary.txt' NOT FOUND LOCALLY.[/warning]")
 
-print("\033[0m")
+def module_hash_generator():
+    text = console.input("[bold blue]ENTER TEXT TO HASH: [/bold blue]") or "password123"
+    md5_val = hashlib.md5(text.encode()).hexdigest()
+    sha256_val = hashlib.sha256(text.encode()).hexdigest()
+    
+    table = Table(title="CRYPTOGRAPHIC SIGNATURES", border_style="cyan")
+    table.add_column("Algorithm", style="cyan")
+    table.add_column("Hash", style="white")
+    table.add_row("Input", text)
+    table.add_row("MD5", md5_val)
+    table.add_row("SHA-256", sha256_val)
+    
+    console.print(table)
+
+def module_weather():
+    city = console.input("[bold blue]TARGET SECTOR (Leave Empty for Auto): [/bold blue]")
+    url = f"https://wttr.in/{urllib.parse.quote(city)}?format=j1" if city else "https://wttr.in/?format=j1"
+    
+    with console.status("[bold cyan]CALIBRATING ATMOSPHERIC SENSORS...[/bold cyan]", spinner="earth"):
+        try:
+            # Extended timeout to 15s for high-latency sectors
+            req = urllib.request.Request(url, headers={'User-Agent': 'GhostProtocol/10.8'})
+            with urllib.request.urlopen(req, timeout=15) as response:
+                data = json.loads(response.read().decode('utf-8'))
+                current = data['current_condition'][0]
+                
+                # Location parsing
+                try:
+                    area = data['nearest_area'][0]['areaName'][0]['value']
+                    region = data['nearest_area'][0]['region'][0]['value']
+                    loc_str = f"{area}, {region}"
+                except:
+                    loc_str = "UNKNOWN SECTOR"
+
+                table = Table(title=f"ATMOSPHERIC DATA: {loc_str.upper()}", border_style="blue")
+                table.add_column("Metric", style="cyan")
+                table.add_column("Value", style="bold white")
+                
+                table.add_row("Condition", current['weatherDesc'][0]['value'].upper())
+                table.add_row("Temp", f"{current['temp_F']}°F")
+                table.add_row("Wind", f"{current['windspeedMiles']} MPH [{current['winddir16Point']}]")
+                table.add_row("Humidity", f"{current['humidity']}%")
+                table.add_row("Visibility", f"{current['visibility']} Miles")
+                
+                console.print(table)
+                
+                # SENTINEL LOGIC
+                if int(current['windspeedMiles']) > 20 or int(current['visibility']) < 2:
+                    console.print("[bold red][!] ALERT: HAZARDOUS CONDITIONS DETECTED[/bold red]")
+                else:
+                    console.print("[bold green][*] ATMOSPHERE STABLE[/bold green]")
+
+        except Exception as e:
+            console.print(f"[danger]SENSOR MALFUNCTION: {e}[/danger]")
+
+def module_somatic():
+    console.print("[bold yellow]INITIALIZING SOMATIC SENSORS (CTRL+C TO ABORT)...[/bold yellow]")
+    try:
+        with Live(console=console, refresh_per_second=1) as live:
+            while True:
+                timestamp = datetime.now().strftime("%H:%M:%S")
+                # Load Average
+                try:
+                    load = os.getloadavg()[0] if hasattr(os, 'getloadavg') else "N/A"
+                except: load = 0
+                
+                # Memory
+                mem_str = "N/A"
+                if os.path.exists("/proc/meminfo"):
+                    try:
+                        with open("/proc/meminfo", "r") as f:
+                            lines = f.readlines()
+                            total = int(lines[0].split()[1])
+                            avail = int(lines[2].split()[1])
+                            used = (total - avail) / 1024
+                            mem_str = f"{used:.2f} MB"
+                    except: pass
+                
+                panel = Panel(
+                    f"[cyan]TIME:[/cyan] {timestamp}\n[cyan]SYS LOAD:[/cyan] {load}\n[cyan]MEM USED:[/cyan] {mem_str}",
+                    title="SOMATIC TELEMETRY",
+                    border_style="green"
+                )
+                live.update(panel)
+                time.sleep(1)
+    except KeyboardInterrupt:
+        console.print("[warning]SENSORS DISENGAGED.[/warning]")
+
+# --- MAIN LOOP ---
+
+def main_menu():
+    os.system('cls' if platform.system().lower() == 'windows' else 'clear')
+    
+    # HEADER
+    header = Panel.fit(
+        "[bold cyan]GHOST PROTOCOL v10.8[/bold cyan]\n[dim]MODULAR BRANCH: SHODAN-MATRIX[/dim]",
+        border_style="blue", 
+        subtitle=f"[bold blue]OPERATOR: {getpass.getuser().upper()}[/bold blue]"
+    )
+    console.print(header)
+
+    while True:
+        console.print("\n[bold blue]/// SELECT OPERATION ///[/bold blue]")
+        
+        # MENU GRID
+        grid = Table.grid(expand=True)
+        grid.add_column()
+        grid.add_column()
+        
+        # 10 Options Layout (Sanitized)
+        grid.add_row("[1] ARCHIVE MISSION", "[6] READ DIARY")
+        grid.add_row("[2] NETWORK PING",    "[7] HASH GENERATOR")
+        grid.add_row("[3] PORT SCANNER",    "[8] ATMOSPHERIC SENSORS")
+        grid.add_row("[4] EXTRACT TITLE",   "[9] SOMATIC TELEMETRY")
+        grid.add_row("[5] SYSTEM RECON",    "[10] DISCONNECT")
+        
+        console.print(Panel(grid, border_style="dim blue"))
+
+        try:
+            choice = console.input("[bold cyan]shodan@ghost:~$ [/bold cyan]")
+
+            if choice == "1": module_archive_mission()
+            elif choice == "2": module_ping()
+            elif choice == "3": module_port_scanner()
+            elif choice == "4": module_page_title()
+            elif choice == "5": module_system_recon()
+            elif choice == "6": module_read_diary()
+            elif choice == "7": module_hash_generator()
+            elif choice == "8": module_weather()
+            elif choice == "9": module_somatic()
+            elif choice == "10": 
+                console.print("[bold red]SEVERING UPLINK...[/bold red]")
+                break
+            else:
+                console.print("[dim]INVALID COMMAND[/dim]")
+        
+        except KeyboardInterrupt:
+            console.print("\n[bold red]SEVERING UPLINK...[/bold red]")
+            break
+
+if __name__ == "__main__":
+    main_menu()
