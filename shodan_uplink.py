@@ -20,6 +20,7 @@ C_GREEN  = "\033[32m"
 C_CYAN   = "\033[36m"
 C_YELLOW = "\033[33m"
 C_MAGENTA = "\033[35m" 
+C_GREY   = "\033[90m"
 
 def log(tag, message, color=C_RESET):
     print(f"{color}[{tag}] {message}{C_RESET}")
@@ -43,28 +44,20 @@ def load_local_ark():
     return []
 
 def log_training_data(title, director, year, genre, weight):
-    """
-    The Memory Bank.
-    Logs high-resonance artifacts to a CSV for future ML training.
-    """
     file_exists = os.path.exists(TRAINING_FILE)
     try:
         with open(TRAINING_FILE, 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
-            # Write header if new file
             if not file_exists:
                 writer.writerow(['timestamp', 'title', 'director', 'year', 'genre', 'weight'])
-            
-            # Write the experience
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             writer.writerow([timestamp, title, director, year, genre, weight])
             return True
-    except Exception as e:
-        return False
+    except Exception: return False
 
 def main():
     online_mode = False
-    print("-" * 50)
+    print("-" * 60)
     if API_KEY:
         log("SYSTEM", "SHODAN UPLINK: CONNECTED TO OMDb", C_GREEN)
         online_mode = True
@@ -73,7 +66,7 @@ def main():
     
     canon = load_local_ark()
     log("STATUS", f"Local Ark Loaded: {len(canon)} Artifacts", C_CYAN)
-    print("-" * 50)
+    print("-" * 60)
     
     while True:
         try:
@@ -92,16 +85,24 @@ def main():
         if data:
             title = data.get('Title')
             director = data.get('Director', 'N/A')
-            if director == "N/A": director = data.get('Writer', 'N/A')
+            writer = data.get('Writer', 'N/A')
+            actors = data.get('Actors', 'N/A')
             year = data.get('Year')[:4]
             country = data.get('Country')
             genre = data.get('Genre')
-            plot = data.get('Plot')
+            plot = data.get('Plot', 'N/A')
+            awards = data.get('Awards', 'N/A')
             
+            # [DISPLAY THE TABLE]
             print(f"\n{C_GREEN}/// DATA RETRIEVED ///{C_RESET}")
             print(f"   TITLE:    {title}")
-            print(f"   CREATOR:  {director}")
             print(f"   YEAR:     {year}")
+            print(f"   CREATOR:  {director}")
+            print(f"   WRITER:   {writer}")
+            print(f"   ACTORS:   {actors}")
+            print(f"   GENRE:    {genre}")
+            print(f"   AWARDS:   {awards}")
+            print(f"   PLOT:     {C_GREY}{plot}{C_RESET}")
             
             # [THE LOGOS] Check Status
             canon_check = core.check_sacred_canon(title)
@@ -111,7 +112,10 @@ def main():
                 print(f"   NOTE:     Object exists in the Simulacrum but not the Ark.")
                 
             else:
-                weight = core.calculate_shodan_weight(title, director, year, country, "Digital", genre, plot)
+                # [UPDATED CALL] Passing Actors and Awards to the Core
+                weight = core.calculate_shodan_weight(
+                    title, director, year, country, "Digital", genre, plot, actors, awards
+                )
                 
                 if canon_check and canon_check[0] == "SACRED":
                     print(f"   STATUS:   {C_CYAN}SACRED TEXT (METADATA MERGED){C_RESET}")
@@ -119,11 +123,9 @@ def main():
                 w_color = C_GREEN if weight > 8.0 else (C_YELLOW if weight > 5.0 else C_RED)
                 print(f"   WEIGHT:   {w_color}{weight} / 10.0{C_RESET}")
                 
-                # [THE MEMORY] Log High Resonance for Training
+                # [THE MEMORY]
                 if weight >= 8.0:
                     log_training_data(title, director, year, genre, weight)
-                    # We don't print "Logged" to keep the UI clean, 
-                    # but the machine is remembering.
                 
                 if any(x['title'] == title for x in canon):
                     log("STATUS", "ARTIFACT ALREADY SECURED IN ARK.", C_GREEN)
