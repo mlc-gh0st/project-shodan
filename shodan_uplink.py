@@ -16,6 +16,7 @@ C_RED    = "\033[31m"
 C_GREEN  = "\033[32m"
 C_CYAN   = "\033[36m"
 C_YELLOW = "\033[33m"
+C_MAGENTA = "\033[35m" # The color of the Simulacrum
 
 def log(tag, message, color=C_RESET):
     print(f"{color}[{tag}] {message}{C_RESET}")
@@ -67,13 +68,8 @@ def main():
         # 2. PROCESS SIGNAL
         if data:
             title = data.get('Title')
-            
-            # [CREATOR FALLBACK] 
-            # If Director is N/A (common in anime), check Writer.
             director = data.get('Director', 'N/A')
-            if director == "N/A":
-                director = data.get('Writer', 'N/A')
-                
+            if director == "N/A": director = data.get('Writer', 'N/A')
             year = data.get('Year')[:4]
             country = data.get('Country')
             genre = data.get('Genre')
@@ -83,35 +79,48 @@ def main():
             print(f"   TITLE:    {title}")
             print(f"   CREATOR:  {director}")
             print(f"   YEAR:     {year}")
-            print(f"   GENRE:    {genre}")
             
-            # [THE LOGOS] Pass data to the Core for judgment
-            weight = core.calculate_shodan_weight(title, director, year, country, "Digital", genre, plot)
+            # [THE LOGOS] Check Status
+            canon_check = core.check_sacred_canon(title)
             
-            if core.check_sacred_canon(title):
-                print(f"   STATUS:   {C_CYAN}SACRED TEXT (METADATA MERGED){C_RESET}")
-            
-            w_color = C_GREEN if weight > 8.0 else (C_YELLOW if weight > 5.0 else C_RED)
-            print(f"   WEIGHT:   {w_color}{weight} / 10.0{C_RESET}")
-            
-            if any(x['title'] == title for x in canon):
-                log("STATUS", "ARTIFACT ALREADY SECURED IN ARK.", C_GREEN)
+            if canon_check and canon_check[0] == "APOCRYPHA":
+                # [THE APOCRYPHA PROTOCOL]
+                print(f"   STATUS:   {C_MAGENTA}/// {canon_check[1]} ///{C_RESET}")
+                print(f"   NOTE:     Object exists in the Simulacrum but not the Ark.")
+                
             else:
-                if weight > 8.0: log("VERDICT", "HIGH RESONANCE. ACQUIRE.", C_GREEN)
-                elif weight < 5.0: log("VERDICT", "LOW SIGNAL. IGNORE.", C_RED)
+                # Standard Calculation
+                weight = core.calculate_shodan_weight(title, director, year, country, "Digital", genre, plot)
+                
+                if canon_check and canon_check[0] == "SACRED":
+                    print(f"   STATUS:   {C_CYAN}SACRED TEXT (METADATA MERGED){C_RESET}")
+                
+                w_color = C_GREEN if weight > 8.0 else (C_YELLOW if weight > 5.0 else C_RED)
+                print(f"   WEIGHT:   {w_color}{weight} / 10.0{C_RESET}")
+                
+                if any(x['title'] == title for x in canon):
+                    log("STATUS", "ARTIFACT ALREADY SECURED IN ARK.", C_GREEN)
+                else:
+                    if weight > 8.0: log("VERDICT", "HIGH RESONANCE. ACQUIRE.", C_GREEN)
+                    elif weight < 5.0: log("VERDICT", "LOW SIGNAL. IGNORE.", C_RED)
 
-        # 3. FALLBACK (Offline or Not Found)
+        # 3. FALLBACK (Offline)
         else:
-            sacred_weight = core.check_sacred_canon(query)
-            if sacred_weight:
-                print(f"\n{C_GREEN}/// SACRED TEXT IDENTIFIED (OFFLINE) ///{C_RESET}")
-                print(f"   TITLE:    {query.title()}")
-                print(f"   STATUS:   HARDCODED")
-                print(f"   WEIGHT:   {C_GREEN}{sacred_weight} / 10.0{C_RESET}")
+            canon_check = core.check_sacred_canon(query)
+            if canon_check:
+                if canon_check[0] == "APOCRYPHA":
+                    print(f"\n{C_MAGENTA}/// APOCRYPHA IDENTIFIED ///{C_RESET}")
+                    print(f"   TITLE:    {query.title()}")
+                    print(f"   STATUS:   {canon_check[1]}")
+                else:
+                    print(f"\n{C_GREEN}/// SACRED TEXT IDENTIFIED (OFFLINE) ///{C_RESET}")
+                    print(f"   TITLE:    {query.title()}")
+                    print(f"   STATUS:   HARDCODED")
+                    print(f"   WEIGHT:   {C_GREEN}{canon_check[1]} / 10.0{C_RESET}")
             elif online_mode:
                 log("ERROR", "Artifact not found in Global Database.", C_RED)
             else:
-                log("ERROR", "Uplink Down. Cannot verify unknown artifact.", C_RED)
+                log("ERROR", "Uplink Down.", C_RED)
 
 if __name__ == "__main__":
     main()
